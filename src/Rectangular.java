@@ -1,10 +1,14 @@
 import java.lang.Math;
+import java.util.Random;
 
 public class Rectangular extends Triangle
 {
-    public static final double epsilon = 1E-2;
+    private static final double epsilon = Math.ulp(1.0);
 
-    public void isRectangular()
+    public Rectangular()
+    { random = new Random(); }
+
+    public void rectangular()
     {
         if(Math.abs(90d - angleA) < epsilon)
         {
@@ -24,30 +28,30 @@ public class Rectangular extends Triangle
         else
             straight_angleA = straight_angleB = straight_angleC = false;
     }
-    public static void isMinHypotenuse(Rectangular[] triangles, int size)
+    public static void findMinHypotenuse(Rectangular[] triangles, int size)
     {
         int count = 0, index = 0;
         double min_hypotenuse = 50d;
 
         for(int i = 0; i < size; i++)
         {
-            if(triangles[i].straight_angleA && triangles[i].sideA < min_hypotenuse)
+            if(triangles[i].straight_angleA && triangles[i].sideBC < min_hypotenuse)
             {
-                min_hypotenuse = triangles[i].sideA;
+                min_hypotenuse = triangles[i].sideBC;
                 index = i;
                 count++;
                 continue;
             }
-            if(triangles[i].straight_angleB && triangles[i].sideB < min_hypotenuse)
+            if(triangles[i].straight_angleB && triangles[i].sideAC < min_hypotenuse)
             {
-                min_hypotenuse = triangles[i].sideB;
+                min_hypotenuse = triangles[i].sideAC;
                 index = i;
                 count++;
                 continue;
             }
-            if(triangles[i].straight_angleC && triangles[i].sideC < min_hypotenuse)
+            if(triangles[i].straight_angleC && triangles[i].sideAB < min_hypotenuse)
             {
-                min_hypotenuse = triangles[i].sideC;
+                min_hypotenuse = triangles[i].sideAB;
                 index = i;
                 count++;
                 continue;
